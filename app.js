@@ -20,6 +20,7 @@ var app = express();
 // this in a reliable storage
 app.locals.users = {};
 
+
 // MSAL config
 const msalConfig = {
   auth: {
