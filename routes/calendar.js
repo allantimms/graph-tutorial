@@ -8,6 +8,11 @@ const iana = require('windows-iana');
 const { body, validationResult } = require('express-validator');
 const validator = require('validator');
 
+const JsonDB = require('node-json-db').JsonDB;
+const Config = require('node-json-db/dist/lib/JsonDBConfig').Config;
+const eventsDB = new JsonDB(new Config("eventsDB",true,true,"/"));
+
+
 /* GET /calendar */
 /* GET /calendar */
 router.get('/',
@@ -32,8 +37,10 @@ router.get('/',
       // but in UTC. For example, for Pacific Standard Time, the time value would be
       // 07:00:00Z
       var weekStart = zonedTimeToUtc(startOfWeek(new Date()), timeZoneId.valueOf());
-      var weekEnd = addDays(weekStart, 7);
+      var weekEnd = addDays(weekStart, 14);
       console.log(`Start: ${formatISO(weekStart)}`);
+
+      console.log(req.app.locals);
 
       try {
         // Get the events
@@ -43,7 +50,9 @@ router.get('/',
           formatISO(weekStart),
           formatISO(weekEnd),
           user.timeZone);
-
+          console.log(user.email);
+          console.log(events.value);
+          eventsDB.push("/" + user.email + "/events", events.value);
         // Assign the events to the view parameters
         params.events = events.value;
       } catch (err) {

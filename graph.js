@@ -62,7 +62,7 @@ module.exports = {
         endDateTime: encodeURIComponent(end)
       })
       // Get just the properties used by the app
-      .select('subject,organizer,start,end, attendees')
+      .select('*')
       // Order by start time
       .orderby('start/dateTime')
       // Get at most 50 results
