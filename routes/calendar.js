@@ -51,8 +51,10 @@ router.get('/',
           formatISO(weekEnd),
           user.timeZone);
           console.log(user.email);
-          console.log(events.value);
+          //console.log(events.value);
           eventsDB.push("/" + user.email + "/events", events.value);
+
+
         // Assign the events to the view parameters
         params.events = events.value;
       } catch (err) {
