@@ -50,7 +50,7 @@ router.get('/',
           formatISO(weekStart),
           formatISO(weekEnd),
           user.timeZone);
-          console.log(user.email);
+          //console.log(user.email);
           //console.log(events.value);
           eventsDB.push("/" + user.email + "/events", events.value);
 
